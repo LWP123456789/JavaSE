@@ -64,3 +64,34 @@ Java中严格区分大小写，长度无限制。
 
 常量名：所有字母都大写。多单词时每个单词用下划线连接：XXX_YYY_ZZZ
 
+## 变量
+
+```
+class VariableTest {
+	public static void main(String[] args) {
+	//变量的定义
+	int myAge = 12;
+	//变量的使用
+	System.out.println(myAge);
+	
+	//变量的声明
+	int myNumber;
+	//变量的赋值
+	myNumber = 1001;
+	
+	System.out.println(myNumber);
+	}
+}
+```
+
+> **使用变量注意：**
+>
+> Java中每个变量必须先声明，后使用
+>
+> 使用变量名来访问这块区域的数据
+>
+> 变量的作用域：其定义所在的一对{ }内 
+>
+> 变量只有在其作用域内才有效
+>
+> 同一个作用域内，不能定义重名的变量
