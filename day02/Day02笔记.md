@@ -234,3 +234,79 @@ class StringTest {
 }
 ```
 
+### 运算符
+
+```java
+int a1 = 10;
+int b1 = ++a1;
+System.out.println("a1 = " + a1 + ",b1 = " + b1);
+
+int a2 = 10;
+int b2 = a2++;
+System.out.println("a2 = " + a2 + ",b2 = " + b2);
+
+//(前)++：先自增1，然后再运算
+//(后)++：先运算，后自增1
+```
+
+赋值运算符
+
+> +=、-=、*=、/=、%=
+
+逻辑运算符
+
+![image-20211023222827239](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211023222827239.png)
+
+“&”和“&&”的区别：
+
+单&时，左边无论真假，右边都进行运算；
+
+双&时，如果左边为真，右边参与运算，如果左边为假，那么右边不参与运算。 
+
+“|”和“||”的区别同理，||表示：当左边为真，右边不参与运算。 
+
+异或( ^ )与或( | )的不同之处是：当左右都为true时，结果为false。
+
+理解：异或，追求的是“异”!
+
+
+
+位运算符
+
+![image-20211023223048618](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211023223048618.png)
+
+三元运算符
+
+![image-20211023223138500](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20211023223138500.png)
+
+> 凡是可以使用三元运算符的地方，都可以改写为if-else
+>
+> 反之，不成立。
+
+### Scanner
+
+如何从键盘获取不同类型的变量：需要使用Scanner类
+
+具体实现步骤：
+
+1.导包：import java.util.Scanner;
+
+2.**`Scanner`**的实例化
+
+3.调用Scanner类的相关方法，来获取指定类型的变量
+
+```java
+import java.util.Scanner;
+
+class ScannerTest {
+	public static void main(String[] args) {
+		
+        Scanner scan = new Scanner(System.in);
+        
+        int num = scan.nextInt();
+        System.out.println(num);
+        
+	}
+}
+```
+
