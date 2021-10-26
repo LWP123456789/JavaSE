@@ -494,3 +494,89 @@ public class ValueTransferTest1 {
 >
 > 形参是引用数据类型：将实参引用数据类型变量的“地址值”传递给形参
 
+将对象作为参数传递给方法
+
+```java
+public class Circle {
+    double radius;//半径
+    
+    //求圆的面积
+    public double findArea(){
+        return Math.PI * radius * radius;
+    }
+}
+public class PassObject {
+    
+    public static void main(String[] args) {
+    	PassObject test = new PassObject();
+    
+        Circle c = new Circle();
+
+        test.printAreas(c,5);
+
+        System.out.println("now radiu is " + c.radius)	
+        
+    }
+    
+    public void printAreas(Circle c,int time){
+        
+        System.out.println("Radius\t\tArea");
+        
+        for(int i = 1; i <= time; i++){
+        	//设置圆的半径
+            c.radiu = i;
+            double area = c.findArea();
+            System.out.println(c,radius + "\t\t" + area);
+        }
+        
+        c.radius = time +１；
+        
+    }
+}
+```
+
+递归
+
+```java
+/*
+递归方法的使用
+1.递归方法：一个方法体内调用它自身。
+2.方法递归包含了一种隐式的循环，它会重复执行某段代码，但这种重复执行无需循环控制。
+递归一定要向已知方向递归，否则这种递归就变成了无穷递归，类似于死循环
+*/
+
+public class RecursionTest {
+    public static void main(String[] args) {
+        //计算1~100之间的所有自然数的和
+        RecursionTest test = new RecursionTest();
+        int sum1 = test.getSum(100);
+        System.out.println(sum1);
+        
+        int value = test.f(10);
+        System.out.println(value);
+    }
+    
+    public int getSum(int n) {
+        if(n == 1){
+            return 1;
+        }else{
+            return n + getSum(n - 1);
+        }
+    }
+    
+    //已知有一个数列：f(0) = 1,f(1) = 4,f(n+2) = 2*f(n+1) + f(n),其中n是大于0的整数，求f(10)的值。
+    public int f(int n) {
+        if(n == 0){
+            return 1;
+        }else if(n == 1){
+            return 4;
+        }else{
+            return 2*f(n - 1) + f(n - 2); //注意有向性
+        }
+    }
+}
+```
+
+> 递归一定要**向已知方向递归**，否则这种递归就变成了无穷递归，类似于死循环
+
+经典案例：斐波那契数列、汉诺塔问题、快速排序等
