@@ -170,6 +170,10 @@ class Circle {
 ```
 
 ```java
+//内存解析的说明
+/*
+	1.引用类型的变量，只可能存储两类值：null 或 地址值
+*/
 //对象数组
 public class StudentTest {
     public static void main(String[] args) {
@@ -216,3 +220,277 @@ Math.random()方法的补充说明：
 > 如果要生成[0,n]的随机整数的话，只需要Math.random()乘以n+1，生成[0,n+1)的浮点数，再强制类型转换为int类型，只取其整数部分，即可得到[0,n]的整数。
 >
 > **生成的[m,n]之间的随机整数的方法：先生成[0,n-m]的随机整数，然后再加上m,即可得到[m,n]之间的随机整数。**
+
+```java
+//匿名对象的使用
+
+public class InstanceTest {
+    public static void main(String[] arg) {
+        Phone p = new Phone();
+//        p = null;
+        System.out.println(p);
+        
+        p.sendEmail();
+        p.playGame();
+        
+        //匿名对象
+        /*
+        new Phone().sendEmail();
+        new Phone().playGame();
+        new Phone().price = 1999;
+        new Phone().showPrice();//0.0
+        */
+        
+        PhoneMall mall = new PhoneMall();
+//        mall.show(p);
+        //匿名对象的使用
+        mall.show(new Phone());
+        
+        /*匿名对象的使用
+        1.理解：我们创建的对象，没有显式地赋给一个变量名。即为匿名对象
+        2.特征：匿名对象只能调用一次。（一次性对象）
+        3.使用：如上
+        */
+        
+    }
+}
+
+class PhoneMall{
+    
+    public void show(Phone phone){
+        //调用的是同一对象，phone式形参，局部变量放在栈中
+        phone.sendEmail();
+        phone.playGame();
+    }
+}
+
+class Phone {
+    double price;
+    
+    public void sendEmail(){
+        System.out.println("发送邮件");
+    }
+    
+    public void playGame(){
+        System.out.println("玩游戏");
+    }
+    
+    public void showPrice(){
+        
+    }
+}
+```
+
+```java
+/*
+自定义数组的工具类
+*/
+public class ArrayUtil {
+    
+    //求数组的最大值
+    public int getMax(int[] arr){
+        int maxValue = arr[0];
+        for(int i = 1; i < arr.length; i++){
+            if(maxValue < arr[i]){
+                maxValue = arr[i];
+            }
+        }
+        return maxValue;
+    }
+    
+    //求数组的最小值
+    public int getMin(int[] arr){
+        int minValue = arr[0];
+        for(int i = 1; i < arr.length; i++){
+            if(minValue > arr[i]){
+                minValue = arr[i];
+            }
+        }
+        return minValue;
+    }
+    
+    //求数组的总和
+    public int getSum(int[] arr){
+        int sum = 0;
+        for(int i = 0; i < arr.length; i++){
+            sum += arr[i];
+        }
+        return sum;
+    }
+    
+    //求数组的平均值
+    public int getAvg(int[] arr){
+        //方法中调方法
+        return getSum(arr)/arr.length;
+    }
+    
+    //反转数组
+    public void reverse(int[] arr){
+        
+    }
+    
+    //复制数组
+    public int[] copy(int[] arr){
+        int[] arr1 = new int[arr.length];
+        for(int i = 0; i < arr1.length; i++){
+            arr1[i] = arr[i];
+        }
+        return arr1;
+    }
+    
+    //数组排序
+    public void sort(int[] arr){
+        //冒泡排序
+        for(int i = 0; i < arr.length - 1; i++) {
+            
+            for(int j = 0; j < arr.length - 1 - i; j++) {
+                if(arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+    
+    //遍历数组
+    public void print(int[] arr){
+        for(int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i] + "\t");
+        }
+    }
+    
+    //查找指定元素
+    public int getIndex(int[] arr,int dest){
+        for (int i = 0; i < arr.length; i++) {
+            
+            if(dest == arr[i]) {
+                return i;
+            }
+        }
+        
+        return -1;//返回一个负数，表示没有找到
+    }
+        
+}
+```
+
+Array工具类测试：
+
+```java
+public class ArrayUtilTest {
+    public static void main(String[] args) {
+        
+        ArrayUtil util = new ArrayUtil();
+        int[] arr = new int[]{32,34,32,5,3,54,654,-98,0,-53,5};
+        int max = util.getMax(arr);
+        System.out.println("最大值为：" + max);
+        
+        System.out.println("排序前：");
+        util.print(arr);
+        
+        util.sort(arr);
+        System.out.println("排序后：");
+        util.print(arr);
+        
+        System.out.println("查找：");
+        int index = util.getIndex(arr,5);
+        if(index >= 0){
+            System.out.println("找到了，索引地址为：" + index);
+        }else{
+            System.out.println("未找到");
+        }
+    }
+}
+```
+
+## 方法重载
+
+重载的概念：在同一个类中，允许存在一个以上的同名方法，只要它们的参数个数或者参数类型不同即可。
+
+重载的特点：与返回值类型无关，只看参数列表，且参数列表必须不同。（参数个数或参数类型）。调用时，根据方法参数列表的不同来区别。
+
+```java
+/*
+方法的重载（overload）
+1.定义：在同一个类中，允许存在一个以上的同名方法，只要它们的参数个数或者参数类型不同即可。
+	"两同一不同"：同一个类、相同方法名
+		参数列表不同：参数个数不同，参数类型不同
+*/
+public class OverLoadTest {
+    public static void main(String[] args) {
+        OverLoadTest test = new OverLoadTest();
+        test.getSum(1,2);
+    }
+    public void getSum(int i,int j){
+        System.out.println(i + j);
+    }
+    
+    public void getSum(double d1,double d2){
+        System.out.println(d1 + d2);
+    }
+    
+    public void getSum(int i,String s){
+        System.out.println("3");
+    }
+    
+    public int getSum(int i,int j){
+        return i + j;
+    }
+}
+```
+
+关于变量的赋值：
+
+​	如果变量是基本数据类型，此时赋值的是变量所保存的数据值。
+
+​	如果变量是引用数据类型，此时赋值的是变量所保存的数据的**地址值**。
+
+```java
+/*
+	方法的形参的传递机制：值传递
+	1.形参：方法定义时，声明的小括号内的参数
+	  实参：方法调用时，实际传递给形参的数据
+	
+	2.值传递机制：
+	
+*/ 
+//错误案例
+public class ValueTransferTest1 {
+    public static void main(String[] args) {
+        
+        //交换两个变量的值得操作
+        int m = 10;
+        int n = 20;
+        
+        System.out.println("m = " + m + " , n = " + n);
+        //交换两个变量的值得操作
+        /*
+        int temp = m;
+        m = n;
+        n = temp;
+        */
+        
+        ValueTransferTest1 test = new ValueTransferTest1();
+        test.swap(m,n);
+        
+        System.out.println("m = " + m + " , n = " + n);
+        
+    }
+    
+    public void swap(int m, int n){
+        int temp = m;
+        m = n;
+        n = temp;
+    }
+}
+```
+
+> Java里方法的参数传递方式只有一种：值传递。 即将实际参数值的副本
+>
+> （复制品）传入方法内，而参数本身不受影响。 
+>
+> 形参是基本数据类型：将实参基本数据类型变量的“数据值”传递给形参
+>
+> 形参是引用数据类型：将实参引用数据类型变量的“地址值”传递给形参
+
