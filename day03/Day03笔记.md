@@ -12,15 +12,17 @@ class PrimeNumberTest {
         
         //获取当前时间距离的毫秒数
         long start = System.currentTimeMillis();
-        //优化二：对本身是质数的自然数是有效的。
-        for(int j = 2; j <= Math.sqrt(i); j++) {
+        for(int i = 0; i < 10000; i++){
+	    //优化二：对本身是质数的自然数是有效的。
+            for(int j = 2; j <= Math.sqrt(i); j++) {
             
             if(i % j == 0){
                 isFlag = false;
                 break;//优化一：只对本身非素数的自然数是有效的。
             }
             
-        }
+            }
+	}
         
         if(isFlag == true){
             System.out.println(i);
