@@ -455,7 +455,7 @@ public class OverLoadTest {
 	2.值传递机制：
 	
 */ 
-//错误案例
+//基本数据类型
 public class ValueTransferTest1 {
     public static void main(String[] args) {
         
